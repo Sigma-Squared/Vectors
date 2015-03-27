@@ -2,7 +2,7 @@ import math
 from numbers import Number
 
 
-class VectorException(Exception):
+class VectorError(Exception):
     pass
 
 
@@ -45,7 +45,7 @@ class Vector(object):
 
     def combine(self, other):
         if len(self.values) != len(other.values):
-            raise VectorException('Vector Dimensions are unequal')
+            raise VectorError('Vector Dimensions are unequal')
         else:
             return zip(self.values, other.values)
 
@@ -65,7 +65,7 @@ class Vector(object):
         if isinstance(other, Number):
             return Vector(*(a * other for a in self.values))
         elif type(other) == type(self):
-            raise VectorException('Type of multiplication unspecified')
+            raise VectorError('Type of multiplication unspecified')
         else:
             raise TypeError(
                 'Cannot multiply Vector and ' + type(other).__name__)
@@ -81,11 +81,11 @@ class Vector(object):
             _a = self.values
             _b = other.values
             if len(_a) != len(_b):
-                raise VectorException('Vector Dimensions are unequal')
+                raise VectorError('Vector Dimensions are unequal')
                 return False
             if not (2 <= len(_a) <= 3):
-                raise VectorException(
-                    'Cross product can only be calculated for 2d and3d Vectors.')
+                raise VectorError(
+                    'Cross product can only be calculated for 2d and 3d Vectors.')
                 return False
             if len(_a) == 2:
                 _a.append(0)
